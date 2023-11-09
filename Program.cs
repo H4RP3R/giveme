@@ -17,7 +17,10 @@ class Program
         else
         {
             string json = File.ReadAllText(fileName);
-            Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            Dictionary<string, string>? dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+            if (dict == null) { return; }
+
             foreach (var item in dict)
             {
                 data.Add(item.Key, item.Value);
