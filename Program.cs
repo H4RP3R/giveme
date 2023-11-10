@@ -91,6 +91,8 @@ class Program
 
     private static void DeleteValue(string[] args)
     {
+        if (args.Length < 2) { return; }
+
         bool ok = data.Remove(args[1]);
         string text = ok ? "Deleted!" : $"Key [ {args[1]} ] not found.";
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
