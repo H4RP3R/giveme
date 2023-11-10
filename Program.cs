@@ -38,6 +38,13 @@ class Program
             Console.WriteLine("Invalid amount of arguments.");
             return;
         }
+
+        if (data.ContainsKey(args[1]))
+        {
+            Console.WriteLine($"The key [ {args[1]} ] already exists.");
+            return;
+        }
+
         string key = args[1];
         string value = args[2];
         data.Add(key, value);
