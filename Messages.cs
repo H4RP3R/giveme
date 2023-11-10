@@ -22,6 +22,13 @@ class Messages
                         "words. Example: giveme -S <key> \"<several words>\"";
         repository.Add(setMsg);
 
+        Message updateMsg = new();
+        updateMsg.argument = "-U, --update";
+        updateMsg.text = "Update value by key. Usage: giveme -U <key> <value>\n\t\t" +
+                        "Use double quotes if you want to set several words\n\t\t" +
+                        "as a value. Example: giveme -U <key> \"<several words>\"";
+        repository.Add(updateMsg);
+
         Message listMsg = new();
         listMsg.argument = "-L, --list";
         listMsg.text = "List all stored keys.";

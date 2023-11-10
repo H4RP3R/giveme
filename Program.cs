@@ -89,6 +89,27 @@ class Program
         process.StandardInput.WriteLineAsync($"wl-copy {value}");
     }
 
+    private static void UpdateValue(string[] args)
+    {
+        if (args.Length < 3)
+        {
+            Console.WriteLine("Invalid amount of arguments.");
+            return;
+        }
+
+        if (data.ContainsKey(args[1]))
+        {
+            data[args[1]] = args[2];
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            File.WriteAllText(dataFilePath + dataFileName, json);
+            Console.WriteLine("Updated!");
+        }
+        else
+        {
+            Console.WriteLine("Key [ {args[1]} ] not found.");
+        }
+    }
+
     private static void DeleteValue(string[] args)
     {
         if (args.Length < 2) { return; }
@@ -126,6 +147,12 @@ class Program
                 break;
             case "--set":
                 SetValue(args);
+                break;
+            case "-U":
+                UpdateValue(args);
+                break;
+            case "--update":
+                UpdateValue(args);
                 break;
             case "-L":
                 PrintAllKeys();
