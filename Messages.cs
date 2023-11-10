@@ -35,8 +35,8 @@ class Messages
 
     public override string ToString()
     {
-        string output = "\x1b[1mgiveme\x1b[0m — stores key/value pairs. " +
-                        "Inserts a value\n\t into the Wayland clipboard on demand.\n\n";
+        string output = "\x1b[1mgiveme\x1b[0m — stores key/value pairs. Inserts a value into the Wayland\n\t " +
+                        "clipboard on demand. Usage: giveme <key>\n\n";
 
         foreach (var item in repository)
         {
