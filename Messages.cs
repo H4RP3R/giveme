@@ -17,7 +17,9 @@ class Messages
 
         Message setMsg = new();
         setMsg.argument = "-S, --set";
-        setMsg.text = "Set the key value pair. Usage: giveme -S <key> <value>";
+        setMsg.text = "Set the key value pair. Usage: giveme -S <key> <value>\n\t\t" +
+                        "Use double quotes for the value if you want to store several\n\t\t" +
+                        "words. Example: giveme -S <key> \"<several words>\"";
         repository.Add(setMsg);
 
         Message listMsg = new();
