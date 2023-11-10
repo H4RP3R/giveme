@@ -4,19 +4,20 @@ using Newtonsoft.Json;
 
 class Program
 {
-    static string fileName = "give_me_items.json";
+    static string dataFilePath = string.Empty;
+    static string dataFileName = "give_me_items.json";
     static Dictionary<string, string> data = new();
     static Messages msg = new();
 
     private static void ReadOrCreateFile()
     {
-        if (!File.Exists(fileName))
+        if (!File.Exists(dataFilePath + dataFileName))
         {
-            File.WriteAllText(fileName, string.Empty);
+            File.WriteAllText(dataFilePath + dataFileName, string.Empty);
         }
         else
         {
-            string json = File.ReadAllText(fileName);
+            string json = File.ReadAllText(dataFilePath + dataFileName);
             Dictionary<string, string>? dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
             if (dict == null) { return; }
@@ -26,7 +27,7 @@ class Program
                 data.Add(item.Key, item.Value);
             }
             json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText(fileName, json);
+            File.WriteAllText(dataFilePath + dataFileName, json);
         }
     }
 
@@ -41,7 +42,7 @@ class Program
         string value = args[2];
         data.Add(key, value);
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-        File.WriteAllText(fileName, json);
+        File.WriteAllText(dataFilePath + dataFileName, json);
         Console.WriteLine("Saved!");
     }
 
@@ -89,6 +90,8 @@ class Program
     static void Main(string[] args)
     {
         if (args.Length == 0) { return; }
+
+        dataFilePath = AppContext.BaseDirectory;
 
         ReadOrCreateFile();
 
