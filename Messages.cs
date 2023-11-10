@@ -31,6 +31,11 @@ class Messages
         printMsg.argument = "-P, --print";
         printMsg.text = "Prints the value to the console. Usage: giveme <key> -P";
         repository.Add(printMsg);
+
+        Message delMsg = new();
+        delMsg.argument = "-D, --delete";
+        delMsg.text = "Delete value by key. Usage: giveme -D <key>";
+        repository.Add(delMsg);
     }
 
     public override string ToString()

@@ -89,6 +89,15 @@ class Program
         process.StandardInput.WriteLineAsync($"wl-copy {value}");
     }
 
+    private static void DeleteValue(string[] args)
+    {
+        bool ok = data.Remove(args[1]);
+        string text = ok ? "Deleted!" : $"Key [ {args[1]} ] not found.";
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        File.WriteAllText(dataFilePath + dataFileName, json);
+        Console.WriteLine(text);
+    }
+
     private static void PrintAllKeys()
     {
         Console.WriteLine(string.Join(", ", data.Keys.ToArray()));
@@ -104,6 +113,12 @@ class Program
 
         switch (args[0])
         {
+            case "-D":
+                DeleteValue(args);
+                break;
+            case "--delete":
+                DeleteValue(args);
+                break;
             case "-S":
                 SetValue(args);
                 break;
