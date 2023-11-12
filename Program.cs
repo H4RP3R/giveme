@@ -9,6 +9,27 @@ class Program
     static Dictionary<string, string> data = new();
     static Messages msg = new();
 
+    private static string CheckWindowSystem()
+    {
+        Process process = new()
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "bash",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false
+            }
+        };
+        process.StartInfo.ArgumentList.Add("-c");
+        process.StartInfo.ArgumentList.Add("echo $XDG_SESSION_TYPE");
+        process.Start();
+        string output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+        return output.Trim();
+    }
+
     private static void ReadOrCreateFile()
     {
         if (!File.Exists(dataFilePath + dataFileName))
@@ -74,19 +95,29 @@ class Program
             return;
         }
 
-        Process process = new()
+        string ws = CheckWindowSystem();
+
+        if (ws == "wayland")
         {
-            StartInfo = new ProcessStartInfo
+            Process process = new()
             {
-                FileName = "bash",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false
-            }
-        };
-        process.Start();
-        process.StandardInput.WriteLineAsync($"wl-copy {value}");
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "bash",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false
+                }
+            };
+            process.Start();
+            process.StandardInput.WriteLineAsync($"wl-copy {value}");
+        }
+
+        else if (ws == "x11")
+        {
+            TextCopy.ClipboardService.SetText(value);
+        }
     }
 
     private static void UpdateValue(string[] args)
