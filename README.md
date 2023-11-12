@@ -9,7 +9,7 @@ A command-line utility that allows to store key/value pairs and insert values in
 |---|---|
 -H, --help| Display this help
 -S, --set | Set key value pair. Usage: `giveme -S <key> <value>`. Use double quotes for the value if you want to store several words. Example: `giveme -S <key> "<several words>"`.
--U, --update | Update value by key. Usage: giveme `-U <key> <value>`.
+-U, --update | Update value by key. Usage: `giveme -U <key> <value>`.
 -L, --list | List all stored keys.
 -P, --print | Print the value to the console. Usage: `giveme <key> -P`.
 -D, --delete | Delete value by key. Usage: `giveme -D <key>`.
