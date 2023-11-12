@@ -168,32 +168,22 @@ class Program
         switch (args[0])
         {
             case "-D":
-                DeleteValue(args);
-                break;
             case "--delete":
                 DeleteValue(args);
                 break;
             case "-S":
-                SetValue(args);
-                break;
             case "--set":
                 SetValue(args);
                 break;
             case "-U":
-                UpdateValue(args);
-                break;
             case "--update":
                 UpdateValue(args);
                 break;
             case "-L":
-                PrintAllKeys();
-                break;
             case "--list":
                 PrintAllKeys();
                 break;
             case "-H":
-                Console.WriteLine(msg);
-                break;
             case "--help":
                 Console.WriteLine(msg);
                 break;
