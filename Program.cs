@@ -43,10 +43,7 @@ class Program
 
             if (dict == null) { return; }
 
-            foreach (var item in dict)
-            {
-                data.Add(item.Key, item.Value);
-            }
+            data = dict;
             json = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(dataFilePath + dataFileName, json);
         }
@@ -154,7 +151,7 @@ class Program
 
     private static void PrintAllKeys()
     {
-        Console.WriteLine(string.Join(", ", data.Keys.ToArray()));
+        Console.WriteLine(string.Join(", ", data.Keys));
     }
 
     static void Main(string[] args)
