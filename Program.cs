@@ -134,7 +134,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("Key [ {args[1]} ] not found.");
+            Console.WriteLine($"Key [ {args[1]} ] not found.");
         }
     }
 
