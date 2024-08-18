@@ -3,6 +3,10 @@ A command-line utility that allows to store key/value pairs and insert values in
 ## Dependencies
 `wl-clipboard` for Wayland  
 `xsel` for X11
+## Building
+```console
+dotnet publish -c Release -r linux-x64 --self-contained true
+```
 ## Usage
 `giveme <key>`
 | Argument | Description |  
